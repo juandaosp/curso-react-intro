@@ -10,9 +10,7 @@ function TodoItem({text, completed}) {
       {text}
     </p>
     <span>
-      <AiFillDelete style={
-        {color: '#FF4136'}
-      }/>
+      <AiFillDelete style={{color: '#FF4136'}}/>
     </span>
   </li>
     )
