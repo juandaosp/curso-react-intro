@@ -1,16 +1,27 @@
-import { AiFillDelete, AiOutlineFileDone } from "react-icons/ai";
+import { AiFillDelete, AiOutlineFileDone  } from "react-icons/ai";
+import Button from 'react-bootstrap/Button';
 
-function TodoItem({text, completed}) {
+function TodoItem({text, completed, id, markAsCompleted, removeTodo}) {
   return (
   <li>
-    { completed && 
-      <AiOutlineFileDone style={{color: '#4CAF50'}}/>
-    }
+    <Button
+      variant="light"
+      onClick={() => markAsCompleted(id)}
+    >
+      <AiOutlineFileDone 
+        style={{color:  `${completed ? '#4CAF50' : 'gray'}`}}
+      />
+    </Button>
     <p>
       {text}
     </p>
     <span>
-      <AiFillDelete style={{color: '#FF4136'}}/>
+    <Button 
+        variant="secondary"
+        onClick={() => removeTodo(id)}
+      > 
+        <AiFillDelete style={{color: '#FFFFFF'}} />
+      </Button>
     </span>
   </li>
     )
