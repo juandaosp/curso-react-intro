@@ -3,6 +3,8 @@ import { TodoCount } from '../TodoCount';
 import { TodoFilter } from '../TodoFilter';
 import { TodoList } from '../TodoList';
 import { AddTodo } from '../AddTodo'
+import { TodoLoading } from '../TodoLoading'
+import { TodoError } from '../TodoError'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -22,12 +24,14 @@ function AppWrapper(
     showTodoModal,
     newTodoText,
     setNewTodoText,
-    addTodo
+    addTodo,
+    loading,
+    error
   }) {
   return (
     <>
-      <Container as='main'>
-        <Row className='justify-content-center'>
+      <Container className='todo-wrapper' as='main'>
+        <Row className='todo-row justify-content-center'>
             <Col className='todo' xs={8}>
               <TodoCount
                 completed={completedTodos}
@@ -40,6 +44,9 @@ function AppWrapper(
               <TodoList 
                 searchValue={searchValue}
               >
+                {loading && <TodoLoading />}
+                {error && <TodoError />}
+                {!loading && searchedTodos.length <= 0 && <p>Crea tu primer todo</p>}
                 {searchedTodos.map((todo) => (
                   <TodoItem 
                     key={`todo-${todo.id}`}

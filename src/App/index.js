@@ -5,23 +5,15 @@ import { LOCAL_STORAGE_ITEM_NAME } from '../constants'
 import { useLocalStorage } from './useLocalStorage'
 import { AppWrapper } from './AppWrapper';
 
-
-/*const defaultTodos = [
-  {id: 1, text: 'cortar cebolla', completed: false}, 
-  {id: 2, text: 'Llorar con la llorona', completed: false}, 
-  {id: 3, text: 'Llorar con la llorona', completed: false}, 
-  {id: 4, text: 'Tomar curso 1', completed: true}, 
-  {id: 5, text: 'Usar Estados Derivados', completed: true}, 
-]*/
-
 function App() {
-  const [todoList, saveTodos] = useLocalStorage(LOCAL_STORAGE_ITEM_NAME, []);
+  const {item: todoList, saveItem: saveTodos, loading, error} = useLocalStorage(LOCAL_STORAGE_ITEM_NAME, []);
   const [searchValue, setSearchValue] = React.useState('');
   const [showTodoModal, setShowTodoModal] = React.useState(false);
   const completedTodos = todoList.filter((todo) => todo.completed).length;
   const totalTodos = todoList.length;
   const searchedTodos = todoList.filter((todo) => todo.text.toLowerCase().includes(searchValue.toLowerCase()));
   const [newTodoText, setNewTodoText] = React.useState('');
+
   const toggleTodoModal = () => {
     setShowTodoModal(!showTodoModal);
     setNewTodoText('');
@@ -54,7 +46,6 @@ function App() {
     }
     saveTodos(newTodos);
   }
-
   return ( 
     <AppWrapper
       completedTodos={completedTodos}
@@ -69,6 +60,8 @@ function App() {
       newTodoText={newTodoText}
       setNewTodoText={setNewTodoText}
       addTodo={addTodo}
+      loading={loading}
+      error={error}
     />
   )
 }

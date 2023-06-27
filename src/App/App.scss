@@ -1,7 +1,17 @@
-.todo {
-  padding: 0 !important;
-  background-color: #EFEFEF;
-  border: 1px solid #CCCCCC;
-  font-family:  "Roboto", Arial, sans-serif;
-  min-width: 350px;
+.todo-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .todo-row {
+    width: 100%;
+    min-width: 320px;
+
+  }
+  .todo {
+    padding: 0 !important;
+    background-color: #EFEFEF;
+    border: 1px solid #CCCCCC;
+    font-family:  "Roboto", Arial, sans-serif;
+  }
 }
