@@ -1,5 +1,6 @@
 import { AiOutlinePlus } from 'react-icons/ai';
 import Button from 'react-bootstrap/Button';
+import './addTodo.scss';
 
 function AddTodo({setShowTodoModal}) {
   return (

@@ -1,9 +1,9 @@
 import './App.scss';
-import { TodoItem } from './TodoItem/TodoItem';
-import { TodoCount } from './TodoCount/TodoCount';
-import { TodoFilter } from './TodoFilter/TodoFilter';
-import { TodoList } from './TodoList/TodoList';
-import { AddTodo } from './AddTodo/AddTodo'
+import { TodoItem } from './TodoItem';
+import { TodoCount } from './TodoCount';
+import { TodoFilter } from './TodoFilter';
+import { TodoList } from './TodoList';
+import { AddTodo } from './AddTodo'
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';

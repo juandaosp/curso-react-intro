@@ -1,3 +1,5 @@
+import './todoList.scss'
+
 function TodoList(props) {
   return (
     <ul className='todo__list'>

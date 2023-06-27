@@ -1,0 +1,19 @@
+.todo__add-todo {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 40px;
+  margin-bottom: 10px;
+  button {
+    min-width: 45px;
+    min-height: 45px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    border: 1px solid #4CAF50;
+    border-radius: 50%;
+  }
+}

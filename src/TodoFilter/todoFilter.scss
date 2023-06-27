@@ -1,0 +1,13 @@
+.todo__filter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  input {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-size: 14px;
+    border: 1px solid #CCCCCC;
+    font-family:  "Arial", sans-serif;
+    margin-bottom: 12px;
+  }
+}

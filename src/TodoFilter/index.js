@@ -1,4 +1,6 @@
 import React from 'react';
+import './todoFilter.scss'
+
 function TodoFilter({searchValue, setSearchValue}) {
   const searchInputChangeHandler = async(event) => {
     setSearchValue(event.target.value);

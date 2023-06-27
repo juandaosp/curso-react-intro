@@ -1,3 +1,5 @@
+import './todoCount.scss'
+
 function TodoCount({total, completed}) {
   return (
     <header className='todo__counter'>
