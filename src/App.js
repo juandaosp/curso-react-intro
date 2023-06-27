@@ -11,19 +11,36 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { LOCAL_STORAGE_ITEM_NAME } from './constants'
 
 
-const defaultTodos = [
+/*const defaultTodos = [
   {id: 1, text: 'cortar cebolla', completed: false}, 
   {id: 2, text: 'Llorar con la llorona', completed: false}, 
   {id: 3, text: 'Llorar con la llorona', completed: false}, 
   {id: 4, text: 'Tomar curso 1', completed: true}, 
   {id: 5, text: 'Usar Estados Derivados', completed: true}, 
-]
+]*/
+
+function useLocalStorage(itemName, initialValue) {
+  const localStorageTodos = localStorage.getItem(itemName);
+  let parsedItem;
+  if(!localStorageTodos) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = [];
+  } else {
+    parsedItem = JSON.parse(localStorageTodos);
+  }
+  const [item, setItem] = React.useState(parsedItem)
+  const saveItem = (newTodos) => {
+    setItem(newTodos);
+    localStorage.setItem(itemName, JSON.stringify(newTodos));
+  }
+  return [item, saveItem]
+}
 
 function App() {
-  //const parsedTodos = localStorage.getItem()
-  const [todoList, setTodoList] = React.useState(defaultTodos);
+  const [todoList, saveTodos] = useLocalStorage(LOCAL_STORAGE_ITEM_NAME, []);
   const [searchValue, setSearchValue] = React.useState('');
   const [showTodoModal, setShowTodoModal] = React.useState(false);
   const completedTodos = todoList.filter((todo) => todo.completed).length;
@@ -40,27 +57,27 @@ function App() {
       id: todos.length,
       text: newTodoText,
       completed: false
-    })
-    setTodoList(todos);
+    });
+    saveTodos(todos);
     setNewTodoText('newTodoText', newTodoText);
     setShowTodoModal(false);
   }
 const markAsCompleted = (id) => {
-  const newTodos = [...todoList];
+  const newTodos = todoList;
   newTodos.forEach((todo) => {
     if(todo.id === id) {
       todo.completed=true;
     }
   })
-  setTodoList(newTodos);
+  saveTodos(newTodos);
 }
 
 const removeTodo = (id) => {
-  let newTodos = todoList.slice(0, id - 1).concat(todoList.slice(id));
+  let newTodos = todoList.slice(0, id).concat(todoList.slice(id+1));
   if(todoList.length <= 1) {
     newTodos = [];
   }
-  setTodoList(newTodos);
+  saveTodos(newTodos);
 }
   
   return (
