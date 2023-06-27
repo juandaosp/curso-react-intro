@@ -1,9 +1,9 @@
 import './App.scss';
-import { TodoItem } from './TodoItem';
-import { TodoCount } from './TodoCount';
-import { TodoFilter } from './TodoFilter';
-import { TodoList } from './TodoList';
-import { AddTodo } from './AddTodo'
+import { TodoItem } from '../TodoItem';
+import { TodoCount } from '../TodoCount';
+import { TodoFilter } from '../TodoFilter';
+import { TodoList } from '../TodoList';
+import { AddTodo } from '../AddTodo'
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -11,7 +11,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { LOCAL_STORAGE_ITEM_NAME } from './constants'
+import { LOCAL_STORAGE_ITEM_NAME } from '../constants'
+import { useLocalStorage } from './useLocalStorage'
 
 
 /*const defaultTodos = [
@@ -21,23 +22,6 @@ import { LOCAL_STORAGE_ITEM_NAME } from './constants'
   {id: 4, text: 'Tomar curso 1', completed: true}, 
   {id: 5, text: 'Usar Estados Derivados', completed: true}, 
 ]*/
-
-function useLocalStorage(itemName, initialValue) {
-  const localStorageTodos = localStorage.getItem(itemName);
-  let parsedItem;
-  if(!localStorageTodos) {
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItem = [];
-  } else {
-    parsedItem = JSON.parse(localStorageTodos);
-  }
-  const [item, setItem] = React.useState(parsedItem)
-  const saveItem = (newTodos) => {
-    setItem(newTodos);
-    localStorage.setItem(itemName, JSON.stringify(newTodos));
-  }
-  return [item, saveItem]
-}
 
 function App() {
   const [todoList, saveTodos] = useLocalStorage(LOCAL_STORAGE_ITEM_NAME, []);

@@ -1,5 +1,5 @@
 {
-  "name": "platzi-intro-react-base",
+  "name": "my-todo-list",
   "version": "0.1.0",
   "dependencies": {
     "bootstrap": "^5.3.0",
