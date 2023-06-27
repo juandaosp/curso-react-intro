@@ -10,13 +10,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { TodoContext } from './TodoContext';
+import React from 'react';
 
-function AppWrapper(
-  {
-    completedTodos,
-    totalTodos,
-    searchValue,
-    setSearchValue,
+function AppWrapper() {
+  const { 
+    loading,
+    error,
     searchedTodos,
     markAsCompleted,
     removeTodo,
@@ -24,42 +24,32 @@ function AppWrapper(
     showTodoModal,
     newTodoText,
     setNewTodoText,
-    addTodo,
-    loading,
-    error
-  }) {
+    addTodo
+  } = React.useContext(TodoContext);
   return (
     <>
       <Container className='todo-wrapper' as='main'>
         <Row className='todo-row justify-content-center'>
-            <Col className='todo' xs={8}>
-              <TodoCount
-                completed={completedTodos}
-                total={totalTodos}
-              />
-              <TodoFilter 
-                searchValue={searchValue} 
-                setSearchValue={setSearchValue}
-              />
-              <TodoList 
-                searchValue={searchValue}
-              >
-                {loading && <TodoLoading />}
-                {error && <TodoError />}
-                {!loading && searchedTodos.length <= 0 && <p>Crea tu primer todo</p>}
-                {searchedTodos.map((todo) => (
-                  <TodoItem 
-                    key={`todo-${todo.id}`}
-                    id={todo.id}
-                    text={todo.text} 
-                    completed={todo.completed}
-                    markAsCompleted={markAsCompleted}
-                    removeTodo={removeTodo}
-                  />
-                ))}
-              </TodoList>
-              <AddTodo setShowTodoModal={toggleTodoModal}/>
-            </Col>
+          <Col className='todo' xs={8}>
+            <TodoCount />
+            <TodoFilter />
+            <TodoList >
+              {loading && <TodoLoading />}
+              {error && <TodoError />}
+              {!loading && searchedTodos.length <= 0 && <p>Crea tu primer todo</p>}
+              {searchedTodos.map((todo) => (
+                <TodoItem
+                  key={`todo-${todo.id}`}
+                  id={todo.id}
+                  text={todo.text}
+                  completed={todo.completed}
+                  markAsCompleted={markAsCompleted}
+                  removeTodo={removeTodo}
+                />
+              ))}
+            </TodoList>
+            <AddTodo setShowTodoModal={toggleTodoModal} />
+          </Col>
         </Row>
       </Container>
       <Modal show={showTodoModal}>
@@ -68,10 +58,10 @@ function AppWrapper(
         </Modal.Header>
         <Modal.Body>
           <span>Description: </span>
-          <input 
-            type='text' 
+          <input
+            type='text'
             placeholder="Filter your todos"
-            value={newTodoText} 
+            value={newTodoText}
             onChange={($event) => setNewTodoText($event.target.value)}>
           </input>
         </Modal.Body>
